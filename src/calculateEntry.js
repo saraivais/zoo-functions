@@ -25,6 +25,7 @@ function calculateEntry(entrants) {
   const factors = [prices];
 
   factors.push(entries);
+  console.log(factors);
   const resultado = factors
     .reduce(((a, b) => a.child * b.child + a.adult * b.adult + a.senior * b.senior));
   return resultado;
