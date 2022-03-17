@@ -14,13 +14,12 @@ function getOldestFromFirstSpecies(id) {
   // console.log(firstAnimal);
   const animalResidents = firstAnimal.residents;
 
-  const oldestAnimal = animalResidents.reduce((acc, animal) => acc.age > animal.age ? acc : animal);
+  const oldestAnimal = animalResidents
+    .reduce((acc, animal) => (acc.age > animal.age ? acc : animal));
   return Object.values(oldestAnimal);
 
   // pegar o animal com o id que eu tenho;
-  // dps fazer um reduce pra pegar o animal mais velho~ 
-
-
+  // dps fazer um reduce pra pegar o animal mais velho~
 }
 
 getOldestFromFirstSpecies('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1');
