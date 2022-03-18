@@ -38,6 +38,14 @@ function daySchedule(dayName) {
   return wholeSchedule;
 }
 
+// const entireSchedule = weekDays.map((day) => getSchedule(day));
+// const newObject = entireSchedule.reduce(((acc, curr, index) => {
+//   const [value] = Object.values(curr);
+//   acc[Object.keys(curr)] = value;
+//   return acc;
+// }), {});
+// return newObject;
+
 function getSchedule(scheduleTarget) {
   if (weekDays.includes(scheduleTarget)) {
     return daySchedule(scheduleTarget);
@@ -45,13 +53,16 @@ function getSchedule(scheduleTarget) {
   if (animalNames.includes(scheduleTarget)) {
     return animalSchedule(scheduleTarget);
   }
-  const entireSchedule = weekDays.map((day) => getSchedule(day));
-  const newObject = entireSchedule.reduce(((acc, curr, index) => {
-    const [value] = Object.values(curr);
-    acc[Object.keys(curr)] = value;
+
+  const entireSchedule = weekDays.reduce(((acc, curr) => {
+    const thisSchedule = getSchedule(curr);
+    const scheduleValue = thisSchedule[curr];
+    acc[curr] = scheduleValue;
     return acc;
   }), {});
-  return newObject;
+  return entireSchedule;
 }
+
+console.log(getSchedule());
 
 module.exports = getSchedule;
