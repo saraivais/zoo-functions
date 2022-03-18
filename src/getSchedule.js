@@ -63,6 +63,4 @@ function getSchedule(scheduleTarget) {
   return entireSchedule;
 }
 
-console.log(getSchedule());
-
 module.exports = getSchedule;
