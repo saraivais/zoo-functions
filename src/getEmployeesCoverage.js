@@ -43,6 +43,4 @@ function getEmployeesCoverage(chosenEmployee) {
   }
 }
 
-console.log(getEmployeesCoverage());
-
 module.exports = getEmployeesCoverage;
