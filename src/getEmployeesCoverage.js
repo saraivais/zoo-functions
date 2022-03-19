@@ -1,28 +1,10 @@
 const data = require('../data/zoo_data');
 
 const { species, employees } = data;
-// console.log(species, employees);
-// recebe nome ou id, dentro de um objeto~
-// cata o employee;
-// tem que devolver o employee com id, fullname (name + lastname), species (responsiblefor - pega nome com id~), locations (responsiblefor - pega location com id~);
 
-// new Set()
-// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set;
-function getEveryEmployee() {
-  const allEmployees = employees.map((eachEmployee) => {
-    const newObj = {
-      id: eachEmployee.id,
-      fullName: `${eachEmployee.firstName} ${eachEmployee.lastName}`,
-      species: eachEmployee.responsibleFor.map((id) => species
-        .find((animal) => animal.id === id).name),
-      locations: eachEmployee.responsibleFor.map((id) => species
-        .find((animal) => animal.id === id).location),
-    };
-    return newObj;
-  });
-  return allEmployees;
-}
-
+// O objetivo dessa função é retornar o objeto desejado do funcionário selecionado, seja por firstName, lastName ou id, ou então jogar um erro, caso não exista este funcionário.
+// Caso o parâmetro seja válido, a função captura o objeto do funcionário, depois cria um outro objeto, newObj, que vai ser montado de acordo com o funcionário escolhido e retornado.
+// As duas primeiras chaves do newObj são dados de id, firstName e lastName do objeto do employee e as duas últimas chaves são baseadas na chave responsibleFor, que é um array de strings.
 function getOneEmployee(nameOrId) {
   const thisEmployee = employees
     .find((eachEmployee) => eachEmployee.firstName === nameOrId
@@ -41,7 +23,14 @@ function getOneEmployee(nameOrId) {
   return newObj;
 }
 
-// sem parâmetro ~ retorna tudo de todo mundo~
+// Esta função não recebe parâmetros e seu objetivo é retornar um array de objetos baseados nos objetos de cada employee, que são obtidos chamando a função getOneEmployee para cada employee, utilizando sua key firstName;
+function getEveryEmployee() {
+  return employees.map((eachEmployee) => getOneEmployee(eachEmployee.firstName));
+}
+
+// O objetivo desta função é decidir como e qual função será chamada, passando um parâmetro simples (string), com base no parâmetro chosenEmployee, que é um objeto que pode conter as chaves name ou id;
+// Se chosenEmployee possuir alguma destas chaves, o valor da chave será passado ao chamar a função getOneEmployee;
+// Se não for passado parâmetro, será chamada a função getEveryEmployee.
 function getEmployeesCoverage(chosenEmployee) {
   if (!chosenEmployee) {
     return getEveryEmployee();

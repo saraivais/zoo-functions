@@ -20,7 +20,7 @@ function createBasicMap() {
   return basicMap;
 }
 
-function addsSpeciesNames(emptyMap) {
+function addsSpeciesNames() {
   const mapWithSpecies = createBasicMap();
   species.forEach((animal) => {
     mapWithSpecies[animal.location].push(animal.name);
@@ -84,7 +84,5 @@ function getAnimalMap(options) {
   }
   return sortsFilters(options);
 }
-
-console.log(getAnimalMap({ includeNames: true, sex: 'female' }));
 
 module.exports = getAnimalMap;
