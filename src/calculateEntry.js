@@ -4,7 +4,7 @@ const { prices } = data;
 
 // Esta função recebe como parâmetro um array de objetos representando pessoas, com nome e idade (name, age) como chaves. Ela retorna outro objeto, com chaves adult, child e senior, que devem ter como valores números que representam a quantidade de pessoas de cada faixa etária que existiam no array de objetos.
 function countEntrants(entrants) {
-  const entryCounter = { adult: 0, child: 0, senior: 0 };
+  const entryCounter = { adult: 0, senior: 0, child: 0 };
   entrants.forEach((person) => {
     if (person.age < 18) {
       entryCounter.child += 1;
@@ -24,8 +24,8 @@ function calculateEntry(entrants) {
   if (!entrants || Object.keys(entrants).length === 0) return 0;
   const entries = countEntrants(entrants);
   const factors = [prices];
-
   factors.push(entries);
+
   const resultado = factors
     .reduce(((a, b) => a.child * b.child + a.adult * b.adult + a.senior * b.senior));
   return resultado;

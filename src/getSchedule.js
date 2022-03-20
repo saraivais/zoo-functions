@@ -54,7 +54,6 @@ function getSchedule(scheduleTarget) {
   if (animalNames.includes(scheduleTarget)) {
     return animalSchedule(scheduleTarget);
   }
-
   const entireSchedule = weekDays.reduce(((acc, curr) => {
     const thisSchedule = getSchedule(curr);
     const scheduleValue = thisSchedule[curr];
@@ -64,6 +63,7 @@ function getSchedule(scheduleTarget) {
   return entireSchedule;
 }
 
+// Código antigo~
 /*
 const entireSchedule = weekDays.map((day) => getSchedule(day));
 const newObject = entireSchedule.reduce(((acc, curr, index) => {
