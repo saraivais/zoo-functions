@@ -1,15 +1,8 @@
 const data = require('../data/zoo_data');
 
 const { species } = data;
-// console.log(species);
 
-// recebe um objeto, que pode ter como keys:
-// includeNames, sex, sorted;
-
-// uma função cria o objeto com as localizações;
-// uma função, que só vai ser chamada com includeNames, cria a lista de nomes. Daí, se tiver sorted ou algum filtro, filtra e depois taca lá~
-
-// createBasicMap retorna um objeto com chaves de locations, com um array vazio dentro~
+// Esta função não recebe parâmetros e cria e retorna um objeto básico, contendo somente as localizações como chaves e arrays vazios como valores.
 function createBasicMap() {
   const basicMap = {};
   species.forEach((animal) => {
@@ -20,6 +13,7 @@ function createBasicMap() {
   return basicMap;
 }
 
+// Esta função não recebe parâmetros e cria um objeto, gerado inicialmente 'vazio' com a função acima createBasicMap(), que é preenchido (o array, que é o valor) pelos nomes das espécies presentes nas localizações que já estão no objeto como keys.
 function addsSpeciesNames() {
   const mapWithSpecies = createBasicMap();
   species.forEach((animal) => {
@@ -28,6 +22,7 @@ function addsSpeciesNames() {
   return mapWithSpecies;
 }
 
+// Esta função recebe como parâmetro o mesmo objeto que getAnimalMap() e retorna um objeto, com chaves de localizações, contendo arrays de objetos, com chaves de nomes de espécies e valores de arrays de strings, com nomes de cada animal individual daquela espécie.
 function allResidentsNames(options) {
   const allNamesMap = createBasicMap();
   species.forEach((animal) => {
@@ -48,6 +43,7 @@ function allResidentsNames(options) {
   return allNamesMap;
 }
 
+// Esta função recebe como parâmetro o mesmo objeto que getAnimalMap() e retorna um objeto, com chaves de localizações, contendo arrays de objetos, com chaves de nomes de espécies e valores de arrays de strings, com nomes de animais individuais da espécie, filtrados por sexo.
 function filterBySex(options) {
   const genderedMap = createBasicMap();
   species.forEach((animal) => {
@@ -69,6 +65,7 @@ function filterBySex(options) {
   return genderedMap;
 }
 
+// Esta função recebe como parâmetro o mesmo objeto que a função getAnimalMap, mas somente quando a chave incluideNames existe, e tem como objetivo chamar funções específicas para quando há ou não a opções de filtrar por sexo.
 function sortsFilters(options) {
   if (options.sex) {
     return filterBySex(options);
@@ -78,6 +75,9 @@ function sortsFilters(options) {
   }
 }
 
+// Esta função recebe como parâmetro um objeto, que pode ter como keys includeNames, sex e sorted, e retorna um objeto com as localizações (NE, NW, SE e SW) como keys e, a depender dos parâmetros passados, somente os nomes das espécies ou objetos para cada espécie, com nome dos residentes em um array de strings.
+// Se a função não receber parâmetros ou receber parâmetros que não possuirem includeNames, deve retornar um objeto com chaves no formato 'localizaçao: [especie, especie ...]'.
+// Se a função receber parâmetros com a chave includeNames === true, invoca uma segunda função cujo objeto é organizar as chaves e valores recebidas como parâmetro e retornar o objeto de acordo com o que foi passado.
 function getAnimalMap(options) {
   if (!options || !options.includeNames) {
     return addsSpeciesNames();
