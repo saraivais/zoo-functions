@@ -1,13 +1,15 @@
 const data = require('../data/zoo_data');
 
 const { employees } = data;
-// console.log(employees);
 
+// Esta função recebe como parâmetro uma string (id) e retorna um booleano, se este id for pertencente a algum manager.
+// O id é determinado manager ou não se estiver presente em algum array 'managers' de outro funcionário.
 function isManager(id) {
-  // retorna true se esse id estiver contido em [managers] de algum outro funcionário;
   return employees.some((employee) => employee.managers.includes(id));
 }
 
+// Esta função recebe um id. Se este id não for de um manager, a função lança um erro.
+// Se o id for de um manager, a função retorna um array de strings contendo os nomes completos (firstName, lastName) de todos os employees que este manager gerencia.
 function getRelatedEmployees(managerId) {
   if (isManager(managerId)) {
     const underManager = employees
